@@ -77,7 +77,7 @@ export const HeroHeader = () => {
                         </div>
 
                         <div className={cn(
-                            "bg-background mb-6 w-full flex-wrap items-start justify-start space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent transition-all duration-300 ease-in-out",
+                            "bg-background mb-6 w-full flex-col items-start justify-start space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 lg:m-0 lg:flex lg:w-fit lg:flex-row lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent transition-all duration-300 ease-in-out",
                             menuState ? "flex opacity-100 translate-y-0" : "hidden lg:flex opacity-0 -translate-y-4"
                         )}>
                             <div className="lg:hidden">
@@ -100,7 +100,7 @@ export const HeroHeader = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 lg:w-fit">
                                 <Button
                                     asChild
                                     variant="outline"
