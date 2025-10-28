@@ -20,22 +20,17 @@ export const HeroHeader = () => {
 
     React.useEffect(() => {
         const handleScroll = () => {
-            const scrollY = window.scrollY
-            // Add some hysteresis to prevent flickering
-            if (scrollY > 100) {
-                setIsScrolled(true)
-            } else if (scrollY < 50) {
-                setIsScrolled(false)
-            }
+            setIsScrolled(window.scrollY > 50)
         }
-        window.addEventListener('scroll', handleScroll, { passive: true })
+        window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
     return (
         <header>
             <nav
-                className="fixed top-0 left-0 z-20 w-full px-2">
-                <div className={cn('mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12', isScrolled && 'bg-background/95 max-w-4xl rounded-2xl border border-gray-300/50 backdrop-blur-lg lg:px-5 shadow-lg')}>
+                data-state={menuState && 'active'}
+                className="fixed z-20 w-full px-2">
+                <div className={cn('mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12', isScrolled && 'bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5')}>
                     <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
                         <div className="flex w-full justify-between lg:w-auto">
                             <Link
@@ -77,23 +72,16 @@ export const HeroHeader = () => {
                         </div>
 
                         <div className={cn(
-                            "bg-background mb-6 w-full flex-col items-start justify-start space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 lg:m-0 lg:flex lg:w-fit lg:flex-row lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent transition-all duration-300 ease-in-out",
-                            menuState ? "flex opacity-100 translate-y-0" : "hidden lg:flex opacity-0 -translate-y-4"
+                            "bg-background mb-6 hidden w-full flex-col items-start justify-start space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 lg:m-0 lg:flex lg:w-fit lg:flex-row lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent",
+                            menuState && "flex"
                         )}>
                             <div className="lg:hidden">
                                 <ul className="space-y-6 text-base">
                                     {menuItems.map((item, index) => (
-                                        <li 
-                                            key={index}
-                                            className={cn(
-                                                "transition-all duration-300 ease-out",
-                                                menuState ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
-                                            )}
-                                            style={{ transitionDelay: menuState ? `${index * 100}ms` : '0ms' }}
-                                        >
+                                        <li key={index}>
                                             <Link
                                                 href={item.href}
-                                                className="text-muted-foreground hover:text-accent-foreground block duration-150 hover:scale-105 transition-transform">
+                                                className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>
                                         </li>
