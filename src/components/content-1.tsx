@@ -1,11 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import { HeroHeader } from './header'
-export default function HeroSection() {
+
+export default function ContentSection() {
     return (
-        <>
-            <HeroHeader />
-            <main className="">
+        <main className="">
                 <section>
                     <div className="pb-12 pt-12 md:pb-20 lg:pb-56 lg:pt-20">
                         <div className="relative mx-auto flex max-w-6xl flex-col px-6 lg:block">
@@ -127,7 +125,6 @@ export default function HeroSection() {
                         </div>
                     </div>
                 </section> */}
-            </main>
-        </>
+        </main>
     )
 }
