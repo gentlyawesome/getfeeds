@@ -28,4 +28,13 @@ export default defineSchema({
       .index("byPaymentId", ["payment_id"])
       .index("byUserId", ["userId"])
       .index("byPayerUserId", ["payer.user_id"]),
+
+      feedback: defineTable({
+        userName: v.string(),
+        userAvatar: v.string(),
+        rating:v.number(),
+        feedbackText:v.string(),
+        date:v.string(),
+        time:v.string(),
+      }),
   });
