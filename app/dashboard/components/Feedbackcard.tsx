@@ -27,25 +27,25 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({ userName, userAvatar, ratin
   .toUpperCase();
 
     return (
-    <Card className='max-w-2xl'>
+    <Card className='w-full max-w-2xl border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900'>
       <CardHeader>
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           {/* Title, avatar and star */}
-          <div className='flex items-center gap-3'>
-            <Avatar>
+          <div className='flex items-center gap-3 sm:gap-4'>
+            <Avatar className='h-10 w-10 sm:h-12 sm:w-12'>
                 <AvatarImage src={userAvatar} alt={userName}/>
                 <AvatarFallback>{initials}</AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">{userName}</h3>
-              <div className='flex items-center gap-1 mt-1'>
+              <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 sm:text-lg">{userName}</h3>
+              <div className='mt-1 flex flex-wrap items-center gap-1 text-xs text-gray-600 dark:text-gray-300 sm:text-sm'>
               {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
                     className={`h-4 w-4 ${
                       star <= rating
                         ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
+                        : 'text-gray-300 dark:text-gray-600'
                     }`}
                   />
                 ))}
@@ -54,14 +54,15 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({ userName, userAvatar, ratin
             </div>
           </div>
           {/* Date and time */}
-          <div className='text-right text-sm text-gray-500'>
-            <div className='font-medium'>{date}</div>
-            <div>{time}</div>
+          <div className='flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500 dark:text-gray-400 sm:flex-col sm:items-end sm:text-right sm:text-sm'>
+            <span className='font-medium whitespace-nowrap'>{date}</span>
+            <span className='text-gray-400 dark:text-gray-600 sm:hidden'>•</span>
+            <span className='whitespace-nowrap'>{time}</span>
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <p className='text-base text-gray-700 leading-relaxed'>{feedbackText}</p>
+        <p className='text-sm leading-relaxed text-gray-700 dark:text-gray-200 sm:text-base'>{feedbackText}</p>
       </CardContent>
     </Card>
   )
@@ -109,16 +110,17 @@ export default function FeedbackCardDemo() {
       };
 
       return(
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8 ">
-          <div className="max-w-4xl mx-auto">
-            <div className='flex items-center justify-between mb-8'>
-
-              <div>
-                <h1 className='text-3xl font-bold text-gray-900 mb-2'>Feedback Dashboard</h1>
-                <p className='text-gray-800'>See what people are saying</p>
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 sm:p-8 dark:from-gray-950 dark:to-gray-900">
+          <div className="mx-auto max-w-4xl">
+            <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+              <div className='text-center sm:text-left'>
+                <h1 className='text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl'>Feedback Dashboard</h1>
+                <p className='text-sm text-gray-700 dark:text-gray-300 sm:text-base'>See what people are saying</p>
               </div>
               {/* Pass the onsubmit callback to DialogDemo */}
-              <DialogDemo onSubmit={handleAddFeedback}/>
+              <div className='flex w-full justify-center sm:w-auto sm:justify-end'>
+                <DialogDemo onSubmit={handleAddFeedback}/>
+              </div>
             </div>
             {/* Cards Here */}
             <div className='space-y-4'>
