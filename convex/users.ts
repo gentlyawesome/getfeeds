@@ -16,13 +16,22 @@ export const upsertFromClerk = internalMutation({
       name: `${data.first_name} ${data.last_name}`,
       email: data.email_addresses[0].email_address,
       externalId: data.id,
+      // Set default plan to "free" for new users
+      plan: "free" as const,
     };
 
     const user = await userByExternalId(ctx, data.id);
     if (user === null) {
       await ctx.db.insert("users", userAttributes);
     } else {
-      await ctx.db.patch(user._id, userAttributes);
+      // Don't overwrite plan if user already exists(they might have upgraded)
+      await ctx.db.patch(user._id, {
+        name: userAttributes.name,
+        email:userAttributes.email,
+        externalId: userAttributes.externalId,
+        // only update plan if it doesn't exist
+        ...(user.plan === undefined && {plan: "free" as const}),
+      });
     }
   },
 });
