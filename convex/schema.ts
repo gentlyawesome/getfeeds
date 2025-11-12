@@ -12,6 +12,8 @@ export default defineSchema({
       posts:v.optional(v.array(v.id("posts"))),
       // this the Clerk ID, stored in the subject JWT field
       externalId: v.string(),
+      // Add plan field - "free" or "premium"
+      plan: v.optional(v.union(v.literal("free"), v.literal("premium"))),
     }).index("byExternalId", ["externalId"]),
 
     posts: defineTable({
@@ -36,5 +38,7 @@ export default defineSchema({
         feedbackText:v.string(),
         date:v.string(),
         time:v.string(),
-      }),
+        // Add userId to track which user received this feedback
+        userId: v.id("users"),
+      }).index("byUserId", ["userId"]), // add index for efficient queries
   });
