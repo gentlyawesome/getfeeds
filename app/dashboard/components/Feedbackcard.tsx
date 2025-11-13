@@ -280,6 +280,6 @@ export default function FeedbackCardDemo() {
               )}
             </div>
           </div>
-        </div>
+        </div> 
       )
 }
