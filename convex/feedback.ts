@@ -153,7 +153,7 @@ export const list = query({
         feedbackText: v.string(),
         date: v.string(),
         time: v.string(),
-        userId: v.id("users"),
+        userId: v.optional(v.id("users")), // Optional to match schema (though query ensures it exists)
       }),
     ),
     handler: async (ctx) => {

@@ -31,14 +31,14 @@ export default defineSchema({
       .index("byUserId", ["userId"])
       .index("byPayerUserId", ["payer.user_id"]),
 
-      feedback: defineTable({
-        userName: v.string(),
-        userAvatar: v.string(),
-        rating:v.number(),
-        feedbackText:v.string(),
-        date:v.string(),
-        time:v.string(),
-        // Add userId to track which user received this feedback
-        userId: v.id("users"),
-      }).index("byUserId", ["userId"]), // add index for efficient queries
+    feedback: defineTable({
+      userName: v.string(),
+      userAvatar: v.string(),
+      rating:v.number(),
+      feedbackText:v.string(),
+      date:v.string(),
+      time:v.string(),
+      // Add userId to track which user received this feedback
+      userId: v.optional(v.id("users")),
+    }).index("byUserId", ["userId"]), // add index for efficient queries
   });

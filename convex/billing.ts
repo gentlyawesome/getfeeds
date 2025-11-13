@@ -53,3 +53,22 @@ export const getPlanInfo = query({
         };
     },
 });
+
+// Mock downgrade mutation (for testing purposes)
+export const downgradeToFree = mutation({
+    args: {},
+    returns: v.object({
+        success: v.boolean(),
+        plan: v.literal("free"),
+    }),
+    handler: async (ctx) => {
+        const user = await getCurrentUserOrThrow(ctx);
+        
+        // Update the plan to "free" for testing
+        await ctx.db.patch(user._id, {
+            plan: "free" as const,
+        });
+        
+        return { success: true, plan: "free" as const };
+    },
+});
